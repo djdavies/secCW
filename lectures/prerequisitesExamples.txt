@@ -1,0 +1,143 @@
+Hi,
+
+ 
+
+For those contemplating the Security option in the Autumn semester, you will need some background in combinatorics, probabilities, and programming. To help you understand better what this background involves, please find below some practice problems. Also, the module will be on applied cryptography, and our textbook will be http://www.amazon.co.uk/Understanding-Cryptography-Textbook-Students-Practitioners/dp/3642041000 (it's in the library).
+
+ 
+
+Note: This is completely informal. It is definitely not an official prerequisite to solve these problems. You are not expected to submit your solutions, and even attempting the problems is not required. This is merely to help you do some self-assessment. If you struggle with these problems, but you still want to take the module, you can prepare before the semester starts, or even during the semester, if you don't mind the extra workload.
+
+ 
+
+Regards,
+
+George
+
+ 
+
+ 
+
+The first 3 problems have to do with combinatorics, and more specifically with combinations.
+
+The next two, 4 and 5, have to do with probabilities.
+
+For both probabilities and combinatorics, you can consult wikipedia (http://en.wikibooks.org/wiki/Probability), or any other textbook, as the material is quite standard.
+
+The last two are programming exercises.
+
+ 
+
+Problem 1:
+
+Ten people go to a party. Nobody knows anyone else, so each person introduces themselves to everybody else. Whenever two people introduce themselves to each other, they shake hands. Count the number of handshakes. Generalize to N people.
+
+ 
+
+Problem 2:
+
+In a lottery, players choose two numbers from 1 to 10 (the two numbers cannot be equal to each other). Then, the organiser picks two numbers at random. In order to win, a player must have chosen the same two numbers. If I play, and I pick 6 and 9, what is the probability that I win? What is the probability of winning if a player still picks two numbers, but the range is 1 to N instead of 1 to 10? What if the range is 1 to 10, the organiser still picks two numbers, but players can pick four numbers (so a player wins if the organiser's two numbers are among the player's four)?
+
+ 
+
+Problem 3:
+
+An instructor selects exam questions as follows: Out of a pool of ten questions, she picks two at random. The students are given the pool of questions. How many questions must a student solve, so as to have at least 50% probability of having solved both questions that will be in the exam?
+
+ 
+
+Problem 4:
+
+You roll a die 6 times. What is the probability that you will get exactly 3 sixes?
+
+ 
+
+Problem 5:
+
+You are given an arbitrary n-bit string (so your answer must be correct for any possible bit string), and you operate on it as follows: You flip a fair coin and, if it comes up Heads, you toggle the first bit (i.e. you change it from '0' to '1' or vice versa). If it comes up Tails, you do nothing. Then you move on to the second bit, you flip the coin again, and so on. What is the expected number of 0s in the resulting string?
+
+ 
+
+Problem 6:
+
+Write a program in Python that calculates the number of times each letter of the alphabet appears in a string that is composed of either capital letters or spaces.
+
+ 
+
+Problem 7:
+
+Write a program in Python that operates on a string A (composed of either capital letters or spaces) by replacing its letters (not the spaces) as dictated by another string B, as follows: Every occurrence of the letter 'A' in string A is replaced with the first letter of string B, every occurrence of 'B' in string A is replaced with the second letter in string B, and so on. String B must have at least 26 letters.
+
+ 
+
+ 
+
+Scroll below for the answers...
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Answer 1:
+
+10-choose-2 handshakes = 9x10/1x2 = 45.
+
+Generalization: N-choose-2 = (N-1)N/2
+
+ 
+
+Answer 2:
+
+There are 10-choose-2 different ways that the organiser can pick a pair of numbers, just like the number of handshakes in problem 1. If I choose two numbers (6 and 9) out of 10, the probability of winning is 1 in 10-choose-2, i.e. 1 in 45.
+
+Generalization to N: 1 in N-choose-2, i.e. 1 in (N-1)N/2, same as in the handshakes.
+
+Generalization to four numbers: With four numbers, there are more pairs that win for me. How many pairs? 4-choose-2, i.e. 3x4/1x2 = 6, so I have 6 in 10-choose-2 chances, i.e. 6 in 45.
+
+ 
+
+Answer 3:
+
+There are, again, 10-choose-2=45 different ways that the instructor can pick a pair of questions. If a student solves two questions, it's like picking two numbers in the lottery, so the probability of finding the right two is 1 in 10-choose-2, i.e. 1 in 45. If the student solves four questions, there are more "winning" pairs of questions. How many? 4-choose-2, i.e. 3x4/1x2 = 6, as in the generalization in Problem 2, so the probability is 6 in 45. By trying higher numbers we find that 5-choose-2 = 4x5/1x2 = 10, 6-choose-2 = 5x6/1x2 = 15, 7-choose-2 = 6x7/1x2 = 21, and 8-choose-2 = 7x8/1x2 = 28. So the right answer is that the student must solve 8 questions.
+
+ 
+
+Answer 4:
+
+The probability of getting exactly 3 sixes in 3 particular rolls (say, the 2nd, the 5th, and the 6th roll) is equal to (1/6)^3 * (5/6)^3. There are 6-choose-3 ways in which we can have 3 six-rolls among the total of 6 rolls, so the sought probability is 6-choose-3 * (1/6)^3 * (5/6)^3. (See also Binomial Probability Distribution)
+
+ 
+
+Answer 5:
+
+Call k the number of 0s in the original string, and l the number of 1s. Because the coin is fair, it comes up Heads with probability 1/2, so the expected number of 0s that toggle to 1 is k/2. The remaining k/2 0s remain 0. Similarly for the 1s, l/2 toggle to 0, and l/2 remain 1. So the expected number of 0s in the resulting string is k/2 + l/2 = n/2, i.e., half the bits.
+
+ 
+
+Answer 6 and 7:
+
+These should be straightforward, but you may want to consult this website http://inventwithpython.com/hacking/chapters/ which teaches Python through programming basic cryptographic algorithms. Problem 7, in particular, is an example of a substitution cipher, discussed in Chapter 17.
