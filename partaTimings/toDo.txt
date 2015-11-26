@@ -1,0 +1,4 @@
+Lorem ipsum (up to a few KB)
+KB = 1000
+so..
+100, 300, 500, 700, 1000...?

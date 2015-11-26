@@ -1,0 +1,20 @@
+Seconds: 0.0124430656433
+Plaintext size: 4096
+Seconds: 0.0170419216156
+Plaintext size: 4096
+Seconds: 0.0160989761353
+Plaintext size: 4096
+Seconds: 0.012314081192
+Plaintext size: 4096
+Seconds: 0.0179510116577
+Plaintext size: 4096
+Seconds: 0.0136969089508
+Plaintext size: 4096
+Seconds: 0.0121388435364
+Plaintext size: 4096
+Seconds: 0.0172739028931
+Plaintext size: 4096
+Seconds: 0.0135819911957
+Plaintext size: 4096
+Seconds: 0.0125298500061
+Plaintext size: 4096
