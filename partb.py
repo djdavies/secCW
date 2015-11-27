@@ -15,8 +15,8 @@ ciphertext_file.close()
 # Convert to a list
 ciphertext_inputList = list(ciphertext_input)
 
-# read k1 to k2 as a list (0, 7, 4, 2, D) 100GBP, bits 10 to 15 (+1 so it reads the 15th)
-k1k2 = ciphertext_inputList[int(sys.argv[2]):int(sys.argv[3])+1]
+# read k1 to k2 as a list (0, 7, 4, 2, D) 100GBP, bytes 10 to 15 (-1 so it reads the 10th)
+k1k2 = ciphertext_inputList[int(sys.argv[2])-1:int(sys.argv[3])]
 
 # plaintext to be replaced (k1 to k2 = 100GBP)
 original = sys.argv[4]
@@ -26,10 +26,10 @@ print ("100GPB to ints: ")
 originalInts = string_to_integers(original)
 print ("---------------")
 
-# Convert k1k2 to ints (the encrypted 100GBP bits)
+# Convert k1k2 to ints (the encrypted 100GBP bytes)
 k1k2ints = map(ord, k1k2)
 
-print ("bits 10 to 15 (100GPB): ")
+print ("bytes 10 to 15 (100GPB): ")
 print (k1k2ints)
 print ("--------------")
 
@@ -54,15 +54,26 @@ xordArrayInts = [int(i) for i in xordArray]
 print ("xordArrayInts: ")
 print (xordArrayInts)
 
-xordArrayReplacementArray = []
+xordReplacementArray = []
 # XOR xordArray with replacement (999EUR) -- in Hex
 for i in range(len(xordArrayInts)):
-	xordArrayReplacement = "%02X" % (xordArrayInts[i] ^ replacementInt[i])
-	xordArrayReplacementArray.append(xordArrayReplacement)
+	xordReplacement = "%02X" % (xordArrayInts[i] ^ replacementInt[i])
+	xordReplacementArray.append(xordReplacement)
 
 print ("xordArray XOR with replacement")
-print (xordArrayReplacementArray)	
+print (xordReplacementArray)
 
-# Write the new k1 to k2 into the ciphertext file (10 to 15)
+# Write the new k1 to k2 (xordAr) into the ciphertext file (10 to 15)
 print ("array of ciphertext: ")
-print (ciphertext_input)
+# Replace elements 10-15 in ciphertext_inputList
+ciphertext_inputList[10] = xordReplacementArray[0]
+ciphertext_inputList[11] = xordReplacementArray[1]
+ciphertext_inputList[12] = xordReplacementArray[2]
+ciphertext_inputList[13] = xordReplacementArray[3]
+ciphertext_inputList[14] = xordReplacementArray[4]
+ciphertext_inputList[15] = xordReplacementArray[5]
+
+# open file for writing new ciphertextfile
+newciphertext_file = open('ciphertext_new.txt', 'a')
+
+newciphertext_file.write(''.join(ciphertext_inputList))
