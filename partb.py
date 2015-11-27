@@ -15,28 +15,54 @@ ciphertext_file.close()
 # Convert to a list
 ciphertext_inputList = list(ciphertext_input)
 
-# read k1 to k2 as a list (0, 7, 4, 2, D)
+# read k1 to k2 as a list (0, 7, 4, 2, D) 100GBP, bits 10 to 15 (+1 so it reads the 15th)
 k1k2 = ciphertext_inputList[int(sys.argv[2]):int(sys.argv[3])+1]
-print (k1k2)
 
-# read plaintext to be replaced (k1 to k2 = 100GBP)
+# plaintext to be replaced (k1 to k2 = 100GBP)
 original = sys.argv[4]
 
 # Convert 100GPB to ints
-print (string_to_integers(original))
+print ("100GPB to ints: ") 
+originalInts = string_to_integers(original)
+print ("---------------")
 
-# Convert k1k2 to ints
+# Convert k1k2 to ints (the encrypted 100GBP bits)
 k1k2ints = map(ord, k1k2)
 
+print ("bits 10 to 15 (100GPB): ")
 print (k1k2ints)
+print ("--------------")
 
+# 999EUR
+replacement = sys.argv[5]
 
-# XOR k1 to k2 (10 to 15 bits) with 999EUR
-# xork1k2 = "%0d" % (k1k2 ^ int(sys.argv[5]))
+# Convert replacement to ints
+replacementInt = string_to_integers(replacement)
 
-# print (xork1k2)
+print ("replacement (999EUR): ")
+print (replacementInt)
 
-# Result in Hex
+xordArray = []
+# XOR k1k2ints with plaintext
+for i in range(len(k1k2ints)):
+	xork1k2pt = "%0d" % (k1k2ints[i] ^ originalInts[i])
+	# Add each XORd value to an array
+	xordArray.append(xork1k2pt)
 
-# This is replacement for original ciphertext (100GPB)
+# convert xordArray str values to ints
+xordArrayInts = [int(i) for i in xordArray]
+print ("xordArrayInts: ")
+print (xordArrayInts)
 
+xordArrayReplacementArray = []
+# XOR xordArray with replacement (999EUR) -- in Hex
+for i in range(len(xordArrayInts)):
+	xordArrayReplacement = "%02X" % (xordArrayInts[i] ^ replacementInt[i])
+	xordArrayReplacementArray.append(xordArrayReplacement)
+
+print ("xordArray XOR with replacement")
+print (xordArrayReplacementArray)	
+
+# Write the new k1 to k2 into the ciphertext file (10 to 15)
+print ("array of ciphertext: ")
+print (ciphertext_input)
