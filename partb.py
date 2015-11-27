@@ -13,21 +13,30 @@ ciphertext_input = ciphertext_file.read()
 ciphertext_file.close() 
 
 # Convert to a list
-ciphertext_inputList = list(ciphertext_input)
+split = 2
+ciphertext_inputList = [ciphertext_input[i:i+split] for i in range(0, len(ciphertext_input), split)]
 
-# read k1 to k2 as a list (0, 7, 4, 2, D) 100GBP, bytes 10 to 15 (-1 so it reads the 10th)
+print (ciphertext_inputList)
+
+# This is where the problem is, I want "4E", NOT "4", "E"...
+# ciphertext_inputList = list(ciphertext_input)
+
+# # read k1 to k2 as a list ('9B', '88', '79', 'E7', '57', '27') 100GBP, bytes 10 to 15 (-1 so it reads the 10th)
 k1k2 = ciphertext_inputList[int(sys.argv[2])-1:int(sys.argv[3])]
 
-# plaintext to be replaced (k1 to k2 = 100GBP)
+print (k1k2)
+
+# # plaintext to be replaced (k1 to k2 = 100GBP)
 original = sys.argv[4]
 
-# Convert 100GPB to ints
+# # Convert "100GPB" to ints
 print ("100GPB to ints: ") 
 originalInts = string_to_integers(original)
+print (originalInts)
 print ("---------------")
 
-# Convert k1k2 to ints (the encrypted 100GBP bytes)
-k1k2ints = map(ord, k1k2)
+# # Convert k1k2 to ints (the encrypted 100GBP bytes)
+k1k2ints = map(int, k1k2)
 
 print ("bytes 10 to 15 (100GPB): ")
 print (k1k2ints)
