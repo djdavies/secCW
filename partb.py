@@ -16,7 +16,7 @@ ciphertext_file.close()
 ciphertext_inputList = list(ciphertext_input)
 
 # read k1 to k2 as a list (0, 7, 4, 2, D)
-k1k2 = ciphertext_inputList[int(sys.argv[2]):int(sys.argv[3])]
+k1k2 = ciphertext_inputList[int(sys.argv[2]):int(sys.argv[3])+1]
 print (k1k2)
 
 # read plaintext to be replaced (k1 to k2 = 100GBP)
