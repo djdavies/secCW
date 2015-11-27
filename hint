@@ -1,0 +1,7 @@
+XOR original ciphertext (6 bits) k1 to k2 (0, 7, 4, 2, D)
+
+with plaintext k1 to k2 (100GBP)
+
+XOR the result from this with 999EUR (6 bits in decimal). 
+
+The result from this must be in HEX. This result is the replacement for the original ciphertext k1 to k2. 
